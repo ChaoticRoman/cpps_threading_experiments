@@ -4,9 +4,9 @@
 
 Below are two complete C++17 examples that each launch a separate thread that prints "hello" every 100 milliseconds for ten times. The first example uses std::this_thread::sleep_for, and the second uses a busy‐waiting loop by repeatedly checking std::chrono::steady_clock::now().
 
-● Example 1: Using std::this_thread::sleep_for (CPU friendly)
+* Example 1: Using std::this_thread::sleep_for (CPU friendly)
 
------------------------------------------------------------
+```c++
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -24,13 +24,13 @@ int main() {
     t.join();
     return 0;
 }
------------------------------------------------------------
+```
 
 In this version the thread executes, prints “hello” then sleeps. While sleeping, the thread does not consume CPU time; the OS scheduler puts the thread aside.
 
-● Example 2: Using a Busy-Wait Loop (CPU intensive)
+* Example 2: Using a Busy-Wait Loop (CPU intensive)
 
------------------------------------------------------------
+```c++
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -55,11 +55,11 @@ int main() {
     t.join();
     return 0;
 }
------------------------------------------------------------
+```
 
 Here, instead of blocking, the thread continuously checks the time until 100 milliseconds have elapsed. This loop uses processor cycles continuously and is therefore far less CPU friendly.
 
-● Measuring CPU Usage on Linux
+## Measuring CPU Usage on Linux
 
 There are several ways to measure the CPU usage of these programs on Linux:
 
@@ -88,7 +88,9 @@ There are several ways to measure the CPU usage of these programs on Linux:
 
 The version using std::this_thread::sleep_for is more CPU friendly because it tells the OS to pause the thread’s execution, freeing up the CPU for other tasks. In contrast, the busy-wait loop continuously polls the clock and consumes CPU cycles even when no useful work is being done.
 
-## Results
+## Results 
+
+**Note:** Run by actual human :-)
 
 ```
 $ g++ sleep.cpp 
